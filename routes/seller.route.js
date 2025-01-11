@@ -12,4 +12,3 @@ router.get("/:sellerId/lotteries/:lotteryId", updateSellerLottery);
 module.exports = router;
 
 
-// no change

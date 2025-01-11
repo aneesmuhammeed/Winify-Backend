@@ -4,6 +4,15 @@ const Product = require("./models/product.model.js");
 const productRoute = require("./routes/product.route.js");
 const app = express();
 
+
+const pinataSDK = require("@pinata/sdk");
+const { generateImage } = require("./sharp.js");
+const { mintLotteryNFT , fetchTokenUri, getTokenId , fetchTokenIdbyBuyer } = require("./nft.js");       //mod69
+const fs = require('fs');
+const path = require('path');
+const { default: axios } = require('axios'); 
+
+
 // Import environment variables
 require('dotenv').config();
 
@@ -18,6 +27,161 @@ app.use(express.urlencoded({ extended: false }));
 // Define routes
 app.use("/buyer", buyerRoute);
 app.use("/seller", sellerRoute);
+
+
+
+
+  //pinata
+
+  
+// Pinata API keys
+const pinataApiKey = "d68b2830f199fd17ede7";
+const pinataSecretApiKey = "d2544c72f98eacfc9fee0e85db990d2f9a4455eb3ee010408a99cfa3ca2382da";
+
+// Create Pinata instance
+const pinata = new pinataSDK({ 
+    pinataApiKey: pinataApiKey, 
+    pinataSecretApiKey: pinataSecretApiKey 
+});
+
+// Helper function to upload buffer to Pinata
+async function addToPinata(imageBuffer, metadata) {
+    try {
+        // Create a temporary file from the buffer
+        const tempFilePath = path.join(__dirname, 'lotteryimages', `temp_${Date.now()}.png`);
+        fs.writeFileSync(tempFilePath, imageBuffer);
+
+        // Create a readable stream from the temporary file
+        const readableStreamForFile = fs.createReadStream(tempFilePath);
+        
+        const options = {
+            pinataMetadata: {
+                name: metadata.name || "Lottery Image",
+                keyvalues: {
+                    lottery: "yes",
+                    lotteryCode: metadata.lotteryCode,
+                    lotteryId: metadata.lotteryId
+                }
+            }
+        };
+
+        // Upload to Pinata
+        const result = await pinata.pinFileToIPFS(readableStreamForFile, options);
+
+        // Clean up temporary file
+        fs.unlinkSync(tempFilePath);
+
+        return `https://gateway.pinata.cloud/ipfs/${result.IpfsHash}`;
+    } catch (error) {
+        throw new Error("Failed to upload to Pinata: " + error.message);
+    }
+}
+
+//editts
+
+
+
+//win12313 selected --> msg : payment suceed -> then call this end point
+// piinata and sharp only used for this route
+// lotteryCode WINWIN
+// lottery id number
+// buyeraddress --> pranav 
+
+app.post("/buyer/create-lottery-nft", async (req, res) => {
+  const { lotteryCode, lotteryId, buyerAddress } = req.body;
+
+  if (!lotteryCode || !lotteryId || !buyerAddress) {
+      return res.status(400).json({ error: "Missing required fields." });
+  }
+
+  try {
+      // Step 1: Generate the lottery image
+      const imageBuffer = await generateImage(lotteryCode, lotteryId);
+
+      if (imageBuffer.error) {
+          return res.status(400).json({ error: imageBuffer.error });
+      }
+
+
+      //first
+      // Step 2: Upload the image to Pinata
+      const imageLink = await addToPinata(imageBuffer, {
+          name: `Lottery_${lotteryCode}_${lotteryId}`,
+          lotteryCode,
+          lotteryId,
+      });
+
+      //Second create final metadata
+      // Step 3: Create and upload metadata
+      const metadata = {
+          name: `Lottery Ticket ${lotteryCode}-${lotteryId}`,
+          description: `NFT Lottery ticket for code ${lotteryCode}`,
+          image: imageLink,
+          attributes: [
+              {
+                  trait_type: "Lottery Type",
+                  value: lotteryCode,
+              },
+              {
+                  trait_type: "Lottery ID",
+                  value: lotteryId,
+              },
+          ],
+      };
+
+
+      
+
+      //step 4 : upload metadata to pinata
+      // hashway
+      const metadataResult = await pinata.pinJSONToIPFS(metadata, {
+          pinataMetadata: {
+              name: `Metadata_${lotteryCode}_${lotteryId}`,
+          },
+      });
+      //return hash
+
+
+
+      
+      // Use metadataResult's IpfsHash to generate the tokenURI
+      const tokenURI = `https://gateway.pinata.cloud/ipfs/${metadataResult.IpfsHash}`;
+
+      console.log("Calling mintLotteryNFT with:");
+      console.log({ buyerAddress, tokenURI, lotteryId });
+
+
+
+      // Step 4: Mint NFT on Ethereum Sepolia
+      const mintNFTHash = await mintLotteryNFT(buyerAddress, tokenURI, lotteryId);
+      //hashvalue details will be obtained
+      
+
+
+      //modified code BELOW       //mod69
+      //roll no
+      const retrieveTokenId = await getTokenId();
+
+      //modified code ABOVE
+
+
+      
+      res.status(200).json({
+          message: "Lottery NFT successfully generated and uploaded to Pinata",
+          imageLink,
+          metadataLink: tokenURI,//pinata metadata link working!!
+          nfttransactionHash: mintNFTHash,//etherscan checking link nft transition all and stuffs
+          tokenId : retrieveTokenId //0 based indexing bascially roll on --> uniqe
+          // mod69
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: error.message });
+  }
+});
+//create-lottery-nft
+
+
 
 
 
@@ -106,3 +270,9 @@ mongoose.connect(process.env.MONGO_URI)
   .catch((err) => {
     console.log('Not Connected!', err);
   });
+
+
+
+
+
+
