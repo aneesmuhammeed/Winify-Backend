@@ -24,7 +24,7 @@ const updateSellerLotteries = async (req, res) => {
     // Predefined lotteries (this will be the same every time)
     const predefinedLotteries = [
       {
-        id: "WIN-WIN",
+        id: "WINWIN",
         image: "https://glitch-aswin.github.io/nft-pics/images/kadhakali10326.png",
         value: 1,
         url: "https://ipfs.io/ipfs/QmYHwMMtCa17ZM3Px4BZEHmGC7uhH9ZcTn8pMakC5KuNHV",
@@ -36,7 +36,7 @@ const updateSellerLotteries = async (req, res) => {
         url: "https://ipfs.io/ipfs/QmY2G97dYT4Ph6RPdpb22FuNZNGoG3q3CoxH14V6DbY6va",
       },
       {
-        id: "FIFTY-FIFTY",
+        id: "FIFTYFIFTY",
         image: "https://glitch-aswin.github.io/nft-pics/images/illam10501.png",
         value: 1,
         url: "https://ipfs.io/ipfs/QmVSZGQ3Vvj3cUK8cBUdT3w72kRQprYFVf4x4h6NLqLPS5",
@@ -54,7 +54,7 @@ const updateSellerLotteries = async (req, res) => {
         url: "https://ipfs.io/ipfs/QmP5F1iUKh6smPWEhyVgKofbytwTddyvUfiCy9FK4XqBAf",
       },
       {
-        id: "PLUS-KARUNYA",
+        id: "PLUSKARUNYA",
         image: "https://glitch-aswin.github.io/nft-pics/images/vembanad1054.png",
         value: 1,
         url: "https://ipfs.io/ipfs/QmUdikQibzviWto7dyzt2LhABSFVLcUUGeFtGjwkMHqUr9",

@@ -4,11 +4,11 @@ const axios = require("axios");
 //need to be changed rigzin
 // Mapping lotteryCOdes to templates that have been hsoted on IPFS
 const lotteryCodeToTemplate = {
-    WW: "https://gateway.pinata.cloud/ipfs/QmbZYdfN1zex94Pdttt3BQekk5CGUQ6uMrYQuWCQPRQwq3",
-    KR: "https://gateway.pinata.cloud/ipfs/code2",
-    SW: "https://gateway.pinata.cloud/ipfs/code3",
-    KP: "https://gateway.pinata.cloud/ipfs/code4",
-    SS: "https://gateway.pinata.cloud/ipfs/code5",
+    WINW: "https://gateway.pinata.cloud/ipfs/QmbZYdfN1zex94Pdttt3BQekk5CGUQ6uMrYQuWCQPRQwq3",
+    KARU: "https://gateway.pinata.cloud/ipfs/code2",
+    FIFT: "https://gateway.pinata.cloud/ipfs/code3",
+    STHR: "https://gateway.pinata.cloud/ipfs/code4",
+    AKSH: "https://gateway.pinata.cloud/ipfs/code5",
 };
 
 // Image cache for templates
