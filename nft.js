@@ -13,7 +13,7 @@ const { ethers } = require("ethers");
 
 //instance -- solidity code interaction
 const CONTRACT_ABI = require("./NFTContract.abi.json");
-const CONTRACT_ADDRESS = "0x2d0543f99C99A1b72EE178a6FE470022fB444C8d";     //remix cancun address not mine
+const CONTRACT_ADDRESS = " ";     //remix cancun address not mine
 
 
 // Connect to Ethereum provider (e.g., Ganache, Infura, or Alchemy)

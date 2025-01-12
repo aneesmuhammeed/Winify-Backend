@@ -1,10 +1,84 @@
 const { Seller } = require("../models/product.model");  // Import the Seller model
 
-// Helper function to generate a random lottery ID with a fixed prefix
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+require('dotenv').config();
+
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+
 const generateLotteryId = (prefix) => {
   const randomPart = Math.floor(1000 + Math.random() * 9000); // Generate a 4-digit random number
   return `${prefix}${randomPart}`;
 };
+
+
+// Helper function to generate random seller name and story
+const generateSellerNameAndStory = async () => {
+  const prompt = `
+    Create a random Kerala lottery seller name and an inspiring story about their journey in selling lotteries. 
+    Make it emotional and engaging, touching on their struggles and triumphs. Example format:
+
+    Name: [Seller Name]
+    Story: [Their unique and heartwarming story]
+  `;
+
+  try {
+    const result = await model.generateContent(prompt);
+    const responseText = result.response.text();
+
+    // Extract the name and story from the response
+    const [nameLine, storyLine] = responseText.split("\n").filter(line => line.trim());
+    const name = nameLine.replace("Name:", "").trim();
+    const story = storyLine.replace("Story:", "").trim();
+
+    return { name, story };
+  } catch (error) {
+    console.error("Error generating seller name and story:", error);
+    throw new Error("Failed to generate seller name and story");
+  }
+};
+
+// Controller to generate a seller with a random name and story
+const generateSellerId = async (req, res) => {
+  try {
+    let sellerId;
+    let unique = false;
+
+    // Generate a random 8-digit ID and ensure it's unique
+    while (!unique) {
+      sellerId = Math.floor(10000000 + Math.random() * 90000000).toString();
+      const existingSeller = await Seller.findOne({ sellerId });
+      if (!existingSeller) {
+        unique = true;
+      }
+    }
+
+    // Generate random seller name and story
+    const { name, story } = await generateSellerNameAndStory();
+
+    // Create a new seller document with the generated details
+    const newSeller = new Seller({
+      sellerId: sellerId,
+      name: name,
+      age: Math.floor(20 + Math.random() * 40), // Random age between 20 and 60
+      details: story,
+      lotteries: [], // Default empty lotteries array
+    });
+
+    // Save the new seller to the database
+    await newSeller.save();
+
+    // Respond with the generated sellerId, name, and story
+    res.status(200).json({ sellerId, name, story });
+  } catch (error) {
+    console.error("Error generating seller with story:", error);
+    res.status(500).json({ message: "Error generating seller with story" });
+  }
+};
+
+
+
 
 // Helper function to generate 5 unique lottery IDs for a given prefix
 const generateUniqueLotteries = (prefix) => {
@@ -118,43 +192,6 @@ const updateSellerLottery = async (req, res) => {
   }
 };
 
-// Controller to handle generating seller ID
-const generateSellerId = async (req, res) => {
-  try {
-    let sellerId;
-    let unique = false;
-
-    // Loop to ensure the generated ID is unique
-    while (!unique) {
-      // Generate a random 8-digit ID
-      sellerId = Math.floor(10000000 + Math.random() * 90000000).toString();
-
-      // Check if the ID already exists in the database
-      const existingSeller = await Seller.findOne({ sellerId });
-      if (!existingSeller) {
-        unique = true;  // ID is unique, break the loop
-      }
-    }
-
-    // Create a new seller document with the generated sellerId
-    const newSeller = new Seller({
-      sellerId: sellerId,  // Generated unique seller ID
-      name: "Unknown",      // Default values for name, age, and details
-      age: 0,               // Default age
-      details: "Generated automatically", // Default details
-      lotteries: []         // Default empty lotteries array
-    });
-
-    // Save the new seller document to the database
-    await newSeller.save();
-
-    // Return the generated sellerId in the response
-    res.status(200).json({ sellerId });
-  } catch (error) {
-    console.error("Error generating seller ID:", error);
-    res.status(500).json({ message: "Error generating seller ID" });
-  }
-};
 
 // Controller to handle deleting a unique lottery
 const deleteUniqueLottery = async (req, res) => {
@@ -200,3 +237,7 @@ module.exports = {
   updateSellerLottery,
   deleteUniqueLottery
 };
+
+
+
+
