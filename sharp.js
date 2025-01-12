@@ -4,11 +4,12 @@ const axios = require("axios");
 //need to be changed rigzin
 // Mapping lotteryCOdes to templates that have been hsoted on IPFS
 const lotteryCodeToTemplate = {
-    WINW: "https://gateway.pinata.cloud/ipfs/QmbZYdfN1zex94Pdttt3BQekk5CGUQ6uMrYQuWCQPRQwq3",
-    KARU: "https://gateway.pinata.cloud/ipfs/code2",
-    FIFT: "https://gateway.pinata.cloud/ipfs/code3",
-    STHR: "https://gateway.pinata.cloud/ipfs/code4",
-    AKSH: "https://gateway.pinata.cloud/ipfs/code5",
+    WINW: "https://gateway.pinata.cloud/ipfs/bafkreibozax3jxfaobwgbscgip7mxhq63svg7gtytssypikeoyugkscsqm",
+    KARU: "https://gateway.pinata.cloud/ipfs/bafkreig5tx3jutkvms4ytsrfzbqife7sobn3qg5nwpfuyyk2vrpw2gxewu",
+    FIFT: "https://gateway.pinata.cloud/ipfs/bafkreihhhwbbdh2y63zmekrobrzhjcyvuj7t57qwy6rv732rqsdmuze6ia",
+    STHR: "https://gateway.pinata.cloud/ipfs/bafkreiemzbvrwqewufx55ww7zx3rta6v3efg3a3uc7pgntmr7h7l6suphm",
+    AKSH: "https://gateway.pinata.cloud/ipfs/bafkreifj5dgoemm7au7jpdsylt2hwa2np2owayytaskk42pxciqlejxwba",
+    PLUS: "https://gateway.pinata.cloud/ipfs/bafkreicectj6t5cj32e6r5ylb4rs2ugg7gbakflgi5tamzrmmxl3tkc2jy",
 };
 
 // Image cache for templates
