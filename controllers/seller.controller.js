@@ -99,37 +99,37 @@ const updateSellerLotteries = async (req, res) => {
     const predefinedLotteries = [
       {
         id: "WINWIN",
-        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/WIN-WIN%20LOTTERY.png",
+        image: "https://raw.githubusercontent.com/aneesmuhammeed/Winify-Backend/main/images/WIN-WIN%20LOTTERY.png",
         value: 1,
         url: "https://gateway.pinata.cloud/ipfs/bafkreibozax3jxfaobwgbscgip7mxhq63svg7gtytssypikeoyugkscsqm",
       },
       {
         id: "KARUNYA",
-        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/KARUNYA.png",
+        image: "https://raw.githubusercontent.com/aneesmuhammeed/Winify-Backend/main/images/KARUNYA.png",
         value: 1,
         url: "https://gateway.pinata.cloud/ipfs/bafkreig5tx3jutkvms4ytsrfzbqife7sobn3qg5nwpfuyyk2vrpw2gxewu",
       },
       {
         id: "FIFTYFIFTY",
-        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/FIFTY-FIFTY%20LOTTERY.png",
+        image: "https://raw.githubusercontent.com/aneesmuhammeed/Winify-Backend/main/images/FIFTY-FIFTY%20LOTTERY.png",
         value: 1,
         url: "https://gateway.pinata.cloud/ipfs/bafkreihhhwbbdh2y63zmekrobrzhjcyvuj7t57qwy6rv732rqsdmuze6ia",
       },
       {
         id: "STHREESHAKTHI",
-        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/STHREESHAKTHI%20LOTTERY.png",
+        image: "https://raw.githubusercontent.com/aneesmuhammeed/Winify-Backend/main/images/STHREESHAKTHI%20LOTTERY.png",
         value: 1,
         url: "https://gateway.pinata.cloud/ipfs/bafkreiemzbvrwqewufx55ww7zx3rta6v3efg3a3uc7pgntmr7h7l6suphm",
       },
       {
         id: "AKSHAYA",
-        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/AKSHAYA%20LOTTERY.png",
+        image: "https://raw.githubusercontent.com/aneesmuhammeed/Winify-Backend/main/images/AKSHAYA%20LOTTERY.png",
         value: 1,
         url: "https://gateway.pinata.cloud/ipfs/bafkreifj5dgoemm7au7jpdsylt2hwa2np2owayytaskk42pxciqlejxwba",
       },
       {
         id: "PLUSKARUNYA",
-        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/PLUS%20KARUNYA.png",
+        image: "https://raw.githubusercontent.com/aneesmuhammeed/Winify-Backend/main/images/PLUS%20KARUNYA.png",
         value: 1,
         url: "https://gateway.pinata.cloud/ipfs/bafkreicectj6t5cj32e6r5ylb4rs2ugg7gbakflgi5tamzrmmxl3tkc2jy",
       },
