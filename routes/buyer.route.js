@@ -21,7 +21,6 @@ const { default: axios } = require('axios');            //mod69
 
 
 
-
 // Helper function to generate a lottery ID
 const generateLotteryId = () => {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  // Possible letters for the first two letters

@@ -156,8 +156,47 @@ const generateSellerId = async (req, res) => {
   }
 };
 
+// Controller to handle deleting a unique lottery
+const deleteUniqueLottery = async (req, res) => {
+  try {
+    const { sellerId, lotteryId } = req.body;  // Get sellerId and lotteryId from the request body
+
+    // Find the seller by sellerId
+    const seller = await Seller.findOne({ sellerId });
+    if (!seller) {
+      return res.status(404).json({ message: "Seller not found" });
+    }
+
+    // Check if the seller has any lottery prefixes
+    let lotteryDeleted = false;
+    seller.lotteryPrefixes.forEach((lotteries, prefix) => {
+      // If the lottery ID exists in the current prefix
+      const lotteryIndex = lotteries.indexOf(lotteryId);
+      if (lotteryIndex !== -1) {
+        // Remove the lottery ID from the array
+        lotteries.splice(lotteryIndex, 1);
+        lotteryDeleted = true;
+      }
+    });
+
+    if (!lotteryDeleted) {
+      return res.status(404).json({ message: "Lottery ID not found" });
+    }
+
+    // Save the updated seller document
+    await seller.save();
+
+    // Respond with success and the updated lotteries
+    res.status(200).json({ message: "Lottery deleted successfully", lotteries: seller.lotteryPrefixes });
+  } catch (error) {
+    console.error("Error deleting lottery:", error);
+    res.status(500).json({ message: "Error deleting lottery" });
+  }
+};
+
 module.exports = {
   generateSellerId,
   updateSellerLotteries,
   updateSellerLottery,
+  deleteUniqueLottery
 };
