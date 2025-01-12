@@ -99,39 +99,39 @@ const updateSellerLotteries = async (req, res) => {
     const predefinedLotteries = [
       {
         id: "WINWIN",
-        image: "https://glitch-aswin.github.io/nft-pics/images/kadhakali10326.png",
+        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/WIN-WIN%20LOTTERY.png",
         value: 1,
-        url: "https://ipfs.io/ipfs/QmYHwMMtCa17ZM3Px4BZEHmGC7uhH9ZcTn8pMakC5KuNHV",
+        url: "https://gateway.pinata.cloud/ipfs/bafkreibozax3jxfaobwgbscgip7mxhq63svg7gtytssypikeoyugkscsqm",
       },
       {
         id: "KARUNYA",
-        image: "https://glitch-aswin.github.io/nft-pics/images/palakkad1006.png",
+        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/KARUNYA.png",
         value: 1,
-        url: "https://ipfs.io/ipfs/QmY2G97dYT4Ph6RPdpb22FuNZNGoG3q3CoxH14V6DbY6va",
+        url: "https://gateway.pinata.cloud/ipfs/bafkreig5tx3jutkvms4ytsrfzbqife7sobn3qg5nwpfuyyk2vrpw2gxewu",
       },
       {
         id: "FIFTYFIFTY",
-        image: "https://glitch-aswin.github.io/nft-pics/images/illam10501.png",
+        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/FIFTY-FIFTY%20LOTTERY.png",
         value: 1,
-        url: "https://ipfs.io/ipfs/QmVSZGQ3Vvj3cUK8cBUdT3w72kRQprYFVf4x4h6NLqLPS5",
+        url: "https://gateway.pinata.cloud/ipfs/bafkreihhhwbbdh2y63zmekrobrzhjcyvuj7t57qwy6rv732rqsdmuze6ia",
       },
       {
         id: "STHREESHAKTHI",
-        image: "https://glitch-aswin.github.io/nft-pics/images/vembanad10002.png",
+        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/STHREESHAKTHI%20LOTTERY.png",
         value: 1,
-        url: "https://ipfs.io/ipfs/QmRrsp93NzAXDoCK2vkyYfSWnUDqR8Kz5XLt355NwTZhLC",
+        url: "https://gateway.pinata.cloud/ipfs/bafkreiemzbvrwqewufx55ww7zx3rta6v3efg3a3uc7pgntmr7h7l6suphm",
       },
       {
         id: "AKSHAYA",
-        image: "https://glitch-aswin.github.io/nft-pics/images/vembanad1004.png",
+        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/AKSHAYA%20LOTTERY.png",
         value: 1,
-        url: "https://ipfs.io/ipfs/QmP5F1iUKh6smPWEhyVgKofbytwTddyvUfiCy9FK4XqBAf",
+        url: "https://gateway.pinata.cloud/ipfs/bafkreifj5dgoemm7au7jpdsylt2hwa2np2owayytaskk42pxciqlejxwba",
       },
       {
         id: "PLUSKARUNYA",
-        image: "https://glitch-aswin.github.io/nft-pics/images/vembanad1054.png",
+        image: "https://github.com/aneesmuhammeed/Winify-Backend/blob/main/images/PLUS%20KARUNYA.png",
         value: 1,
-        url: "https://ipfs.io/ipfs/QmUdikQibzviWto7dyzt2LhABSFVLcUUGeFtGjwkMHqUr9",
+        url: "https://gateway.pinata.cloud/ipfs/bafkreicectj6t5cj32e6r5ylb4rs2ugg7gbakflgi5tamzrmmxl3tkc2jy",
       },
     ];
 
